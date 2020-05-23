@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.article`
@@ -50,26 +50,26 @@ export class Incomes extends Component {
   };
 
   handleChangeInput = event => {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleEnter = () => {
-    const {onSubmit} = this.props;
-    const {transaction, category} = this.state;
+    const { onSubmit } = this.props;
+    const { transaction, category } = this.state;
 
     onSubmit(Math.abs(parseFloat(transaction)), category);
-    this.setState({transaction: null, category: null});
+    this.setState({ transaction: null, category: null });
   }
 
   render() {
-    const {transaction, category} = this.state;
+    const { transaction, category } = this.state;
 
 
     return (
       <Container>
         <dl>
           <InputLine>
-            <LineTitle>Внести доход:</LineTitle>
+            <LineTitle>Зароблено копійок:</LineTitle>
             <LineInput>
               <Input
                 name="transaction"
@@ -79,7 +79,7 @@ export class Incomes extends Component {
             </LineInput>
           </InputLine>
           <InputLine>
-            <LineTitle>Категория:</LineTitle>
+            <LineTitle>Категорії:</LineTitle>
             <LineInput>
               <Input
                 name="category"
@@ -89,7 +89,7 @@ export class Incomes extends Component {
             </LineInput>
           </InputLine>
         </dl>
-        <Button onClick={this.handleEnter}>Внести</Button>
+        <Button onClick={this.handleEnter}>Додати</Button>
       </Container>
     );
   }

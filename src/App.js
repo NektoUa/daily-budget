@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import moment from 'moment';
 import styled from 'styled-components';
-import Expanse from './Expanse';
-import Incomes from './Incomes';
+import Expanse from './components/Expanse';
+import Incomes from './components/Incomes';
 
 const DateButton = styled.button`
   color: white;
@@ -178,7 +178,7 @@ class App extends Component {
           </Nav>
 
           {navSelected === 'expanse' ? (
-            <Expanse onSubmit={this.handleSubmitTransaction} />
+            <Expanse onSubmit={this.handleSubmitTransaction} name="expanse" />
           ) : (
               <Incomes onSubmit={this.handleSubmitTransaction} />
             )}
@@ -195,7 +195,7 @@ class App extends Component {
                 .map(({ date, sum, category }, index) => (
                   <tr key={index}>
                     <td>{date}</td>
-                    <td>{sum} ₽</td>
+                    <td>{sum} ₴</td>
                     <td>{category}</td>
                   </tr>
                 ))}
@@ -208,5 +208,3 @@ class App extends Component {
 }
 
 export default App;
-
-// Запись будет!
