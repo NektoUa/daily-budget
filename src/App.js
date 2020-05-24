@@ -82,7 +82,7 @@ class App extends Component {
     const { date: TodayDate, transactions } = this.state;
 
     const newTransaction = {
-      date: TodayDate.format('DD.MM.YYYY'),
+      date: TodayDate.format('hh:mm, DD.MM.YYYY'),
       category: category,
       sum: sum,
     };
@@ -90,8 +90,8 @@ class App extends Component {
     const newTransactions = [...transactions, newTransaction];
 
     newTransactions.sort((a, b) => {
-      const aDate = moment(a.date, 'DD.MM.YYYY');
-      const bDate = moment(b.date, 'DD.MM.YYYY');
+      const aDate = moment(a.date, 'hh:mm, DD.MM.YYYY');
+      const bDate = moment(b.date, 'hh:mm, DD.MM.YYYY');
       return aDate.isAfter(bDate);
     });
 
@@ -111,7 +111,7 @@ class App extends Component {
 
     const currentMonthTransactions = transactions.filter(
       ({ date: transactionDate }) =>
-        moment(transactionDate, 'DD.MM.YYYY').isSame(date, 'month'),
+        moment(transactionDate, 'hh:mm, DD.MM.YYYY').isSame(date, 'month'),
     );
 
     const dailyMoney =
@@ -123,11 +123,11 @@ class App extends Component {
 
     const transactionsBeforeThisDayAndInThisDay = currentMonthTransactions.filter(
       ({ date: transactionDate }) =>
-        moment(transactionDate, 'DD.MM.YYYY').isBefore(
+        moment(transactionDate, 'hh:mm, DD.MM.YYYY').isBefore(
           date,
           'date',
         ) ||
-        moment(transactionDate, 'DD.MM.YYYY').isSame(date, 'date'),
+        moment(transactionDate, 'hh:mm, DD.MM.YYYY').isSame(date, 'date'),
     );
 
     const expanseBeforeToday = transactionsBeforeThisDayAndInThisDay.reduce(
@@ -137,9 +137,10 @@ class App extends Component {
 
     const incomeBeforeToday = date.date() * dailyMoney;
 
+
     console.log({ dailyMoney, expanseBeforeToday, incomeBeforeToday });
 
-    return incomeBeforeToday + expanseBeforeToday;
+    return (incomeBeforeToday + expanseBeforeToday).toFixed(2);
   };
 
   render() {
@@ -150,13 +151,13 @@ class App extends Component {
         <header>
           <h1>Реактивный бюджет</h1>
           <DateLine>
-            <p>{date.format('DD.MM.YYYY')}</p>
+            <p>{date.format('hh:mm, DD.MM.YYYY')}</p>
             <DateButton onClick={this.handleSubtractDay}>
               –
             </DateButton>
             <DateButton onClick={this.handleAddDay}>+</DateButton>
           </DateLine>
-          <p>На сегодня: {this.onToday()} рублей</p>
+          <p>На сьогодні: {this.onToday()} ₴</p>
         </header>
         <main>
           <Nav>
@@ -187,7 +188,7 @@ class App extends Component {
             <tbody>
               {transactions
                 .filter(({ date: transactionDate }) =>
-                  moment(transactionDate, 'DD.MM.YYYY').isSame(
+                  moment(transactionDate, 'hh:mm, DD.MM.YYYY').isSame(
                     date,
                     'month',
                   ),
