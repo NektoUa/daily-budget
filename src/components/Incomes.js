@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import LineInput from './LineInput';
 
 const Container = styled.article`
   display: flex;
@@ -12,25 +13,25 @@ const InputLine = styled.div`
   flex-direction: row;
   line-height: 1.5;
 `;
-const Input = styled.input`
-  font-family: 'Marmelad';
-  font-size: 20px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid white;
-  margin-left: 5px;
-  color: white;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-`;
+// const Input = styled.input`
+//   font-family: 'Marmelad';
+//   font-size: 20px;
+//   background-color: transparent;
+//   border: none;
+//   border-bottom: 1px solid white;
+//   margin-left: 5px;
+//   color: white;
+//   width: 100%;
+//   padding: 0;
+//   margin: 0;
+// `;
 const LineTitle = styled.dt`
   width: 150px;
 `;
-const LineInput = styled.dd`
-  width: 150px;
-  margin: 0;
-`;
+// const LineInput = styled.dd`
+//   width: 150px;
+//   margin: 0;
+// `;
 const Button = styled.button`
   font-family: 'Marmelad';
   color: white;
@@ -70,23 +71,23 @@ export class Incomes extends Component {
         <dl>
           <InputLine>
             <LineTitle>Зароблено копійок:</LineTitle>
-            <LineInput>
-              <Input
+            <LineInput />
+            {/* <Input
                 name="transaction"
                 onChange={this.handleChangeInput}
                 value={transaction || ''}
               />
-            </LineInput>
+            </LineInput> */}
           </InputLine>
           <InputLine>
             <LineTitle>Категорії:</LineTitle>
-            <LineInput>
-              <Input
+            <LineInput />
+            {/* <Input
                 name="category"
                 onChange={this.handleChangeInput}
                 value={category || ''}
               />
-            </LineInput>
+            </LineInput> */}
           </InputLine>
         </dl>
         <Button onClick={this.handleEnter}>Додати</Button>

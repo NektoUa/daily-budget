@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import moment from 'moment';
 import styled from 'styled-components';
-import Expanse from './components/Expanse';
-import Incomes from './components/Incomes';
+import Navigation from './components/Navigation'
+// import Expanse from './components/Expanse';
+// import Incomes from './components/Incomes';
 
 const DateButton = styled.button`
   color: white;
@@ -22,21 +23,21 @@ const DateLine = styled.div`
   align-items: center;
 `;
 
-const Link = styled.span`
-  font-family: 'Marmelad';
-  cursor: pointer;
-  color: white;
-  margin: 0 8px;
-  border-bottom: ${({ selected }) =>
-    selected ? '2px solid white' : 'none'};
-`;
+// const Link = styled.span`
+//   font-family: 'Marmelad';
+//   cursor: pointer;
+//   color: white;
+//   margin: 0 8px;
+//   border-bottom: ${({ selected }) =>
+//     selected ? '2px solid white' : 'none'};
+// `;
 
-const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  font-size: 25px;
-  padding: 40px 0 15px;
-`;
+// const Nav = styled.nav`
+//   display: flex;
+//   justify-content: center;
+//   font-size: 25px;
+//   padding: 40px 0 15px;
+// `;
 
 const Table = styled.table`
   width: 450px;
@@ -74,9 +75,9 @@ class App extends Component {
     this.setState({ date: this.state.date.subtract(1, 'day') });
   };
 
-  handleNavClick = event => {
-    this.setState({ navSelected: event.target.getAttribute('name') });
-  };
+  // handleNavClick = event => {
+  //   this.setState({ navSelected: event.target.getAttribute('name') });
+  // };
 
   handleSubmitTransaction = (sum, category) => {
     const { date: TodayDate, transactions } = this.state;
@@ -144,12 +145,12 @@ class App extends Component {
   };
 
   render() {
-    const { date, navSelected, transactions } = this.state;
+    const { date, transactions } = this.state;
 
     return (
       <section>
         <header>
-          <h1>Реактивный бюджет</h1>
+          <h1>Реактивний бюджет</h1>
           <DateLine>
             <p>{date.format('hh:mm, DD.MM.YYYY')}</p>
             <DateButton onClick={this.handleSubtractDay}>
@@ -160,7 +161,8 @@ class App extends Component {
           <p>На сьогодні: {this.onToday()} ₴</p>
         </header>
         <main>
-          <Nav>
+          <Navigation />
+          {/* <Nav>
             <Link
               name="expanse"
               onClick={this.handleNavClick}
@@ -182,7 +184,7 @@ class App extends Component {
             <Expanse onSubmit={this.handleSubmitTransaction} name="expanse" />
           ) : (
               <Incomes onSubmit={this.handleSubmitTransaction} />
-            )}
+            )} */}
 
           <Table>
             <tbody>

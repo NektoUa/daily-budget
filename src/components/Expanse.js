@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import LineInput from './LineInput';
 
 const Container = styled.article`
   display: flex;
@@ -12,25 +13,25 @@ const InputLine = styled.div`
   flex-direction: row;
   line-height: 1.5;
 `;
-const Input = styled.input`
-  font-family: 'Marmelad';
-  font-size: 20px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid white;
-  margin-left: 5px;
-  color: white;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-`;
+// const Input = styled.input`
+//   font-family: 'Marmelad';
+//   font-size: 20px;
+//   background-color: transparent;
+//   border: none;
+//   border-bottom: 1px solid white;
+//   margin-left: 5px;
+//   color: white;
+//   width: 100%;
+//   padding: 0;
+//   margin: 0;
+// `;
 const LineTitle = styled.dt`
   width: 150px;
 `;
-const LineInput = styled.dd`
-  width: 150px;
-  margin: 0;
-`;
+// const LineInput = styled.dd`
+//   width: 150px;
+//   margin: 0;
+// `;
 const Button = styled.button`
   font-family: 'Marmelad';
   color: white;
@@ -50,43 +51,43 @@ export class Expanse extends Component {
   };
 
   handleChangeInput = event => {
-    this.setState({[event.target.name]: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   handleEnter = () => {
-    const {onSubmit} = this.props;
-    const {transaction, category} = this.state;
+    const { onSubmit } = this.props;
+    const { transaction, category } = this.state;
 
     onSubmit(-1 * Math.abs(parseFloat(transaction)), category);
-    this.setState({transaction: null, category: null});
+    this.setState({ transaction: null, category: null });
   }
 
   render() {
-    const {transaction, category} = this.state;
+    const { transaction, category } = this.state;
 
 
     return (
       <Container>
         <dl>
           <InputLine>
-            <LineTitle>Внести расход:</LineTitle>
-            <LineInput>
-              <Input
+            <LineTitle>Витрачено:</LineTitle>
+            <LineInput />
+            {/* <Input
                 name="transaction"
                 onChange={this.handleChangeInput}
                 value={transaction || ''}
               />
-            </LineInput>
+            </LineInput> */}
           </InputLine>
           <InputLine>
-            <LineTitle>Категория:</LineTitle>
-            <LineInput>
-              <Input
+            <LineTitle>Категорії:</LineTitle>
+            <LineInput />
+            {/* <Input
                 name="category"
                 onChange={this.handleChangeInput}
                 value={category || ''}
               />
-            </LineInput>
+            </LineInput> */}
           </InputLine>
         </dl>
         <Button onClick={this.handleEnter}>Внести</Button>
