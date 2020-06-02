@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import moment from 'moment';
 import styled from 'styled-components';
-import Navigation from './components/Navigation'
-// import Expanse from './components/Expanse';
-// import Incomes from './components/Incomes';
+import Expanse from './components/Expanse';
+import Incomes from './components/Incomes';
 
 const DateButton = styled.button`
   color: white;
@@ -23,21 +22,21 @@ const DateLine = styled.div`
   align-items: center;
 `;
 
-// const Link = styled.span`
-//   font-family: 'Marmelad';
-//   cursor: pointer;
-//   color: white;
-//   margin: 0 8px;
-//   border-bottom: ${({ selected }) =>
-//     selected ? '2px solid white' : 'none'};
-// `;
+const Link = styled.span`
+  font-family: 'Marmelad';
+  cursor: pointer;
+  color: white;
+  margin: 0 8px;
+  border-bottom: ${({ selected }) =>
+    selected ? '2px solid white' : 'none'};
+`;
 
-// const Nav = styled.nav`
-//   display: flex;
-//   justify-content: center;
-//   font-size: 25px;
-//   padding: 40px 0 15px;
-// `;
+const Nav = styled.nav`
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  padding: 40px 0 15px;
+`;
 
 const Table = styled.table`
   width: 450px;
@@ -75,15 +74,15 @@ class App extends Component {
     this.setState({ date: this.state.date.subtract(1, 'day') });
   };
 
-  // handleNavClick = event => {
-  //   this.setState({ navSelected: event.target.getAttribute('name') });
-  // };
+  handleNavClick = event => {
+    this.setState({ navSelected: event.target.getAttribute('name') });
+  };
 
   handleSubmitTransaction = (sum, category) => {
     const { date: TodayDate, transactions } = this.state;
 
     const newTransaction = {
-      date: TodayDate.format('hh:mm, DD.MM.YYYY'),
+      date: TodayDate.format('DD.MM.YYYY'),
       category: category,
       sum: sum,
     };
@@ -91,8 +90,8 @@ class App extends Component {
     const newTransactions = [...transactions, newTransaction];
 
     newTransactions.sort((a, b) => {
-      const aDate = moment(a.date, 'hh:mm, DD.MM.YYYY');
-      const bDate = moment(b.date, 'hh:mm, DD.MM.YYYY');
+      const aDate = moment(a.date, 'DD.MM.YYYY');
+      const bDate = moment(b.date, 'DD.MM.YYYY');
       return aDate.isAfter(bDate);
     });
 
@@ -112,7 +111,7 @@ class App extends Component {
 
     const currentMonthTransactions = transactions.filter(
       ({ date: transactionDate }) =>
-        moment(transactionDate, 'hh:mm, DD.MM.YYYY').isSame(date, 'month'),
+        moment(transactionDate, 'DD.MM.YYYY').isSame(date, 'month'),
     );
 
     const dailyMoney =
@@ -124,11 +123,11 @@ class App extends Component {
 
     const transactionsBeforeThisDayAndInThisDay = currentMonthTransactions.filter(
       ({ date: transactionDate }) =>
-        moment(transactionDate, 'hh:mm, DD.MM.YYYY').isBefore(
+        moment(transactionDate, 'DD.MM.YYYY').isBefore(
           date,
           'date',
         ) ||
-        moment(transactionDate, 'hh:mm, DD.MM.YYYY').isSame(date, 'date'),
+        moment(transactionDate, 'DD.MM.YYYY').isSame(date, 'date'),
     );
 
     const expanseBeforeToday = transactionsBeforeThisDayAndInThisDay.reduce(
@@ -138,37 +137,35 @@ class App extends Component {
 
     const incomeBeforeToday = date.date() * dailyMoney;
 
-
     console.log({ dailyMoney, expanseBeforeToday, incomeBeforeToday });
 
     return (incomeBeforeToday + expanseBeforeToday).toFixed(2);
   };
 
   render() {
-    const { date, transactions } = this.state;
+    const { date, navSelected, transactions } = this.state;
 
     return (
       <section>
         <header>
-          <h1>Реактивний бюджет</h1>
+          <h1>Реактивный бюджет</h1>
           <DateLine>
-            <p>{date.format('hh:mm, DD.MM.YYYY')}</p>
+            <p>{date.format('DD.MM.YYYY')}</p>
             <DateButton onClick={this.handleSubtractDay}>
               –
             </DateButton>
             <DateButton onClick={this.handleAddDay}>+</DateButton>
           </DateLine>
-          <p>На сьогодні: {this.onToday()} ₴</p>
+          <p>На сегодня: {this.onToday()} ₴</p>
         </header>
         <main>
-          <Navigation />
-          {/* <Nav>
+          <Nav>
             <Link
               name="expanse"
               onClick={this.handleNavClick}
               selected={navSelected === 'expanse'}
             >
-              Витрачено
+              Расходы сегодня
             </Link>
 
             <Link
@@ -176,21 +173,21 @@ class App extends Component {
               onClick={this.handleNavClick}
               selected={navSelected === 'incomes'}
             >
-              Зароблено
+              Доходы
             </Link>
           </Nav>
 
           {navSelected === 'expanse' ? (
-            <Expanse onSubmit={this.handleSubmitTransaction} name="expanse" />
+            <Expanse onSubmit={this.handleSubmitTransaction} />
           ) : (
               <Incomes onSubmit={this.handleSubmitTransaction} />
-            )} */}
+            )}
 
           <Table>
             <tbody>
               {transactions
                 .filter(({ date: transactionDate }) =>
-                  moment(transactionDate, 'hh:mm, DD.MM.YYYY').isSame(
+                  moment(transactionDate, 'DD.MM.YYYY').isSame(
                     date,
                     'month',
                   ),

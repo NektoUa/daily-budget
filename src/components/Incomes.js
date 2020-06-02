@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import LineInput from './LineInput';
+import Button from './Button'
+// import LineInput from './LineInput';
 
 const Container = styled.article`
   display: flex;
@@ -13,36 +14,36 @@ const InputLine = styled.div`
   flex-direction: row;
   line-height: 1.5;
 `;
-// const Input = styled.input`
-//   font-family: 'Marmelad';
-//   font-size: 20px;
-//   background-color: transparent;
-//   border: none;
-//   border-bottom: 1px solid white;
-//   margin-left: 5px;
-//   color: white;
-//   width: 100%;
-//   padding: 0;
-//   margin: 0;
-// `;
+const Input = styled.input`
+  font-family: 'Marmelad';
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  margin-left: 5px;
+  color: white;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+`;
 const LineTitle = styled.dt`
   width: 150px;
 `;
-// const LineInput = styled.dd`
-//   width: 150px;
-//   margin: 0;
-// `;
-const Button = styled.button`
-  font-family: 'Marmelad';
-  color: white;
-  border: 1px solid white;
-  border-radius: 31px;
-  background-color: transparent;
-  margin: 3px;
-  cursor: pointer;
-  text-align: center;
-  padding: 5px 20px;
+const LineInput = styled.dd`
+  width: 150px;
+  margin: 0;
 `;
+// const Button = styled.button`
+//   font-family: 'Marmelad';
+//   color: white;
+//   border: 1px solid white;
+//   border-radius: 31px;
+//   background-color: transparent;
+//   margin: 3px;
+//   cursor: pointer;
+//   text-align: center;
+//   padding: 5px 20px;
+// `;
 
 export class Incomes extends Component {
   state = {
@@ -51,6 +52,7 @@ export class Incomes extends Component {
   };
 
   handleChangeInput = event => {
+    console.log(event.target.value)
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -70,27 +72,27 @@ export class Incomes extends Component {
       <Container>
         <dl>
           <InputLine>
-            <LineTitle>Зароблено копійок:</LineTitle>
-            <LineInput />
-            {/* <Input
+            <LineTitle>Копійки:</LineTitle>
+            <LineInput>
+              <Input
                 name="transaction"
                 onChange={this.handleChangeInput}
-                value={transaction || ''}
+                value={transaction || category}
               />
-            </LineInput> */}
+            </LineInput>
           </InputLine>
           <InputLine>
             <LineTitle>Категорії:</LineTitle>
-            <LineInput />
-            {/* <Input
+            <LineInput>
+              <Input
                 name="category"
                 onChange={this.handleChangeInput}
                 value={category || ''}
               />
-            </LineInput> */}
+            </LineInput>
           </InputLine>
         </dl>
-        <Button onClick={this.handleEnter}>Додати</Button>
+        <Button handleEnter={this.handleEnter} />
       </Container>
     );
   }

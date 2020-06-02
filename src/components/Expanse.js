@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import LineInput from './LineInput';
+import Button from './Button'
 
 const Container = styled.article`
   display: flex;
@@ -13,36 +13,36 @@ const InputLine = styled.div`
   flex-direction: row;
   line-height: 1.5;
 `;
-// const Input = styled.input`
-//   font-family: 'Marmelad';
-//   font-size: 20px;
-//   background-color: transparent;
-//   border: none;
-//   border-bottom: 1px solid white;
-//   margin-left: 5px;
-//   color: white;
-//   width: 100%;
-//   padding: 0;
-//   margin: 0;
-// `;
+const Input = styled.input`
+  font-family: 'Marmelad';
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  margin-left: 5px;
+  color: white;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+`;
 const LineTitle = styled.dt`
   width: 150px;
 `;
-// const LineInput = styled.dd`
-//   width: 150px;
-//   margin: 0;
-// `;
-const Button = styled.button`
-  font-family: 'Marmelad';
-  color: white;
-  border: 1px solid white;
-  border-radius: 31px;
-  background-color: transparent;
-  margin: 3px;
-  cursor: pointer;
-  text-align: center;
-  padding: 5px 20px;
+const LineInput = styled.dd`
+  width: 150px;
+  margin: 0;
 `;
+// const Button = styled.button`
+//   font-family: 'Marmelad';
+//   color: white;
+//   border: 1px solid white;
+//   border-radius: 31px;
+//   background-color: transparent;
+//   margin: 3px;
+//   cursor: pointer;
+//   text-align: center;
+//   padding: 5px 20px;
+// `;
 
 export class Expanse extends Component {
   state = {
@@ -70,27 +70,27 @@ export class Expanse extends Component {
       <Container>
         <dl>
           <InputLine>
-            <LineTitle>Витрачено:</LineTitle>
-            <LineInput />
-            {/* <Input
+            <LineTitle>Внести расход:</LineTitle>
+            <LineInput>
+              <Input
                 name="transaction"
                 onChange={this.handleChangeInput}
                 value={transaction || ''}
               />
-            </LineInput> */}
+            </LineInput>
           </InputLine>
           <InputLine>
-            <LineTitle>Категорії:</LineTitle>
-            <LineInput />
-            {/* <Input
+            <LineTitle>Категория:</LineTitle>
+            <LineInput>
+              <Input
                 name="category"
                 onChange={this.handleChangeInput}
                 value={category || ''}
               />
-            </LineInput> */}
+            </LineInput>
           </InputLine>
         </dl>
-        <Button onClick={this.handleEnter}>Внести</Button>
+        <Button handleEnter={this.handleEnter} />
       </Container>
     );
   }
