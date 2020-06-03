@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Button from './Button'
+import Input from './Input'
 // import LineInput from './LineInput';
 
 const Container = styled.article`
@@ -14,18 +15,18 @@ const InputLine = styled.div`
   flex-direction: row;
   line-height: 1.5;
 `;
-const Input = styled.input`
-  font-family: 'Marmelad';
-  font-size: 20px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid white;
-  margin-left: 5px;
-  color: white;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-`;
+// const Input = styled.input`
+//   font-family: 'Marmelad';
+//   font-size: 20px;
+//   background-color: transparent;
+//   border: none;
+//   border-bottom: 1px solid white;
+//   margin-left: 5px;
+//   color: white;
+//   width: 100%;
+//   padding: 0;
+//   margin: 0;
+// `;
 const LineTitle = styled.dt`
   width: 150px;
 `;
@@ -86,9 +87,13 @@ export class Incomes extends Component {
             <LineInput>
               <Input
                 name="category"
+                value={category}
+                onChange={this.handleChangeInput}
+              />
+              {/* name="category"
                 onChange={this.handleChangeInput}
                 value={category || ''}
-              />
+              /> */}
             </LineInput>
           </InputLine>
         </dl>
