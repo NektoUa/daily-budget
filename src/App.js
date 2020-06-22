@@ -4,23 +4,7 @@ import moment from 'moment';
 import styled from 'styled-components';
 import Expanse from './components/Expanse';
 import Incomes from './components/Incomes';
-
-const DateButton = styled.button`
-  color: white;
-  border: 1px solid white;
-  border-radius: 50%;
-  background-color: transparent;
-  width: 32px;
-  height: 32px;
-  margin: 3px;
-  cursor: pointer;
-  text-align: center;
-`;
-
-const DateLine = styled.div`
-  display: flex;
-  align-items: center;
-`;
+import Date from './components/Date'
 
 const Link = styled.span`
   font-family: 'Marmelad';
@@ -66,14 +50,6 @@ class App extends Component {
     this.state = initState;
   }
 
-  handleAddDay = () => {
-    this.setState({ date: this.state.date.add(1, 'day') });
-  };
-
-  handleSubtractDay = () => {
-    this.setState({ date: this.state.date.subtract(1, 'day') });
-  };
-
   handleNavClick = event => {
     this.setState({ navSelected: event.target.getAttribute('name') });
   };
@@ -97,14 +73,6 @@ class App extends Component {
 
     this.setState({ transactions: newTransactions });
   };
-
-  componentDidUpdate() {
-    const { date } = this.state;
-    localStorage.setItem(
-      'state',
-      JSON.stringify({ ...this.state, date: date.format() }),
-    );
-  }
 
   onToday = () => {
     const { transactions, date } = this.state;
@@ -148,14 +116,8 @@ class App extends Component {
     return (
       <section>
         <header>
-          <h1>Реактивный бюджет</h1>
-          <DateLine>
-            <p>{date.format('DD.MM.YYYY')}</p>
-            <DateButton onClick={this.handleSubtractDay}>
-              –
-            </DateButton>
-            <DateButton onClick={this.handleAddDay}>+</DateButton>
-          </DateLine>
+          <h1>Реактивний бюджет</h1>
+          <Date />
           <p>На сегодня: {this.onToday()} ₴</p>
         </header>
         <main>
